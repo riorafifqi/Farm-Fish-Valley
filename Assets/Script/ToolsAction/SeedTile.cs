@@ -10,8 +10,13 @@ public class SeedTile : ToolAction
         if (!mapManager.cropsManager.isPlowed(gridPosition))
             return false;
 
-        mapManager.cropsManager.Seed(gridPosition, item.crop);
+        bool isComplete = mapManager.cropsManager.Seed(gridPosition, item.crop);
 
-        return true;
+        return isComplete;
+    }
+
+    public override void OnItemUsed(Item usedItem, ItemContainer inventory)
+    {
+        inventory.Remove(usedItem);
     }
 }

@@ -15,8 +15,12 @@ public class CropsManager : TimeAgent
 {
     [SerializeField] TileBase plowed;
     [SerializeField] TileBase seeded;
+
     [SerializeField] Tilemap environmentTilemap;
     [SerializeField] Tilemap cropsTilemap;
+    [SerializeField] Tilemap scoreTilemap;
+
+    [SerializeField] ScoreManager scoreManager;
 
 
     Dictionary<Vector2Int, CropTile> crops;
@@ -64,18 +68,24 @@ public class CropsManager : TimeAgent
         environmentTilemap.SetTile((Vector3Int)position, plowed);
     }
 
-    public void Seed(Vector3Int position, Crop toSeed)
+    public bool Seed(Vector3Int position, Crop toSeed)
     {
         if (crops.ContainsKey((Vector2Int)position))
-            return;
+            return false;
 
         cropsTilemap.SetTile(position, seeded);
+        TileBase scoreTile = scoreManager.GetTileBase(position);
+        TilesData scoreData = scoreManager.GetTileData(scoreTile);
+
+        scoreManager.AddScore(scoreData.score);
 
         CropTile crop = new CropTile();
         crops.Add((Vector2Int)position, crop);
         crops[(Vector2Int)position].crop = toSeed;
 
         crop.cropPosition = position;
+
+        return true;
     }
 
     public bool isPlowed(Vector3Int position)

@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class ToolsController : MonoBehaviour
 {
+    ToolbarController toolbarController;
     MapManager mapManager;
     public Item testItem;
 
@@ -13,6 +14,7 @@ public class ToolsController : MonoBehaviour
     private void Awake()
     {
         mapManager = gameObject.GetComponent<MapManager>();
+        toolbarController = GetComponent<ToolbarController>();
     }
 
     // Update is called once per frame
@@ -27,8 +29,17 @@ public class ToolsController : MonoBehaviour
 
     private void UseToolGrid()
     {
-        Item item = testItem;
+        Item item = toolbarController.GetItem;
+        if (item == null) { return;  }
+        if (item.onTileMapAction == null) { return;  }
+
+        //Animator.SetTrigger("act") // for action animator
+
         bool complete = item.onTileMapAction.OnApplyToTileMap(selectedTile, mapManager, item);
+
+        if (complete)
+            if (item.onItemUsed != null)
+                item.onItemUsed.OnItemUsed(item, GameManager.instance.itemContainer);
     }
 
     private void SelectTile()

@@ -16,8 +16,8 @@ public class ToolAction : ScriptableObject
         return true;
     }
 
-    public virtual void OnItemUsed(Item usedItem)
+    public virtual void OnItemUsed(Item usedItem, ItemContainer inventory)
     {
-
+        Debug.LogWarning("OnItemUsed is not inmplemented");
     }
 }

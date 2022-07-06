@@ -1,0 +1,48 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ItemPanel : MonoBehaviour
+{
+    public ItemContainer inventory;
+    public List<InventoryButton> buttons;
+
+    private void Start()
+    {
+        Init();
+    }
+
+    public void Init()
+    {
+        SetIndex();
+        Show();
+    }
+
+    private void SetIndex()
+    {
+        for (int i = 0; i < inventory.itemSlots.Count; i++)
+        {
+            buttons[i].SetIndex(i);
+        }
+    }
+
+    protected void Show()
+    {
+        for (int i = 0; i < inventory.itemSlots.Count; i++)
+        {
+            if (inventory.itemSlots[i].item == null)
+            {
+                buttons[i].Clean();
+            }
+            else
+            {
+                buttons[i].Set(inventory.itemSlots[i]);
+            }
+        }
+    }
+
+    public virtual void OnClick(int id)
+    {
+
+    }
+}

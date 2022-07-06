@@ -11,5 +11,5 @@ public class TilesData : ScriptableObject
     public bool isPlowable;
     public bool isDescriptive;
     public string TileName, description;
-
+    public int score;
 }

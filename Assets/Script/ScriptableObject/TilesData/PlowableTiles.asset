@@ -20,7 +20,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1f85c3d644319ea4bb7e9dd51ebc7905, type: 2}
   - {fileID: 11400000, guid: 2b9961fff844dac4b910a4342c42b6ed, type: 2}
   - {fileID: 11400000, guid: f3b5a555b82abe64f8a87522e9b335da, type: 2}
-  - {fileID: 11400000, guid: 8e61597cd83f45047a13fa388caf0aed, type: 2}
   - {fileID: 11400000, guid: 21baec41936552444970dccde6568e64, type: 2}
   - {fileID: 11400000, guid: be70c5ab71985b24e82ace1cecb1a098, type: 2}
   isPlowable: 1

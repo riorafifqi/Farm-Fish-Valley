@@ -25,27 +25,6 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       /* if(Input.GetMouseButtonDown(0))
-        {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3Int gridPos = map.WorldToCell(mousePos);
-
-            TileBase clickedTile = map.GetTile(gridPos);
-
-            if (dataFromTiles[clickedTile].isDescriptive)
-            {
-                string tileName = dataFromTiles[clickedTile].TileName;
-                string description = dataFromTiles[clickedTile].description;
-
-                Debug.Log(tileName + "'s Description : " + description);    
-            }
-                
-        }*/
-    }
-
     public TileBase GetTileBase(Vector3Int gridPos)
     {
         TileBase tile = map.GetTile(gridPos);
