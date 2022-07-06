@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98857403d0e3dd14ab59a5446513b70c, type: 3}
+  m_Name: Seed
+  m_EditorClassIdentifier: 
+  name: Seed
+  isStackable: 0
+  icon: {fileID: 5818825002101228042, guid: 9dee5a8533bc6964984fa0d9bff8e669, type: 3}
+  onAction: {fileID: 0}
+  onTileMapAction: {fileID: 11400000, guid: 52baefaa976db9948bada7c31e0eb729, type: 2}
+  onItemUsed: {fileID: 0}
+  crop: {fileID: 11400000, guid: 8dfa4cc691d9c5b4bbe67ec3e970a6c9, type: 2}

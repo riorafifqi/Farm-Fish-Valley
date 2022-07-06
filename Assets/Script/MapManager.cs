@@ -6,12 +6,15 @@ using UnityEngine.Tilemaps;
 public class MapManager : MonoBehaviour
 {
     [SerializeField] private Tilemap map;
+    public CropsManager cropsManager;
 
     [SerializeField] public List<TilesData> tileDatas;
     private Dictionary<TileBase, TilesData> dataFromTiles;
 
     private void Awake()
     {
+        cropsManager = gameObject.GetComponent<CropsManager>();
+
         dataFromTiles = new Dictionary<TileBase, TilesData>();
         foreach (var tileData in tileDatas)
         {
@@ -25,19 +28,22 @@ public class MapManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+       /* if(Input.GetMouseButtonDown(0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int gridPos = map.WorldToCell(mousePos);
 
             TileBase clickedTile = map.GetTile(gridPos);
 
-            string tileName = dataFromTiles[clickedTile].TileName;
-            string description = dataFromTiles[clickedTile].description;
-
             if (dataFromTiles[clickedTile].isDescriptive)
-                Debug.Log(tileName + "'s Description : " + description);
-        }
+            {
+                string tileName = dataFromTiles[clickedTile].TileName;
+                string description = dataFromTiles[clickedTile].description;
+
+                Debug.Log(tileName + "'s Description : " + description);    
+            }
+                
+        }*/
     }
 
     public TileBase GetTileBase(Vector3Int gridPos)
