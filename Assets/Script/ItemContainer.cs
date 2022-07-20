@@ -59,7 +59,7 @@ public class ItemContainer : ScriptableObject
             if (itemSlot == null) { return; }
 
             itemSlot.count -= count;
-            if (itemSlot.count < 0)
+            if (itemSlot.count <= 0)
             {
                 itemSlot.Clear();
             }

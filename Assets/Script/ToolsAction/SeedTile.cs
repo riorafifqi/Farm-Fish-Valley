@@ -12,6 +12,9 @@ public class SeedTile : ToolAction
 
         bool isComplete = mapManager.cropsManager.Seed(gridPosition, item.crop);
 
+        if (isComplete)
+            isApplied = true;
+
         return isComplete;
     }
 

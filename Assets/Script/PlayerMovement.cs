@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movement;
     private KeyCode key;
     private bool hold;
+    private SpriteRenderer playerSpriteRenderer;
 
     private Animator animator;
 
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
         key = KeyCode.None;
     }
 
@@ -56,8 +58,15 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
+        if (animator.GetFloat("Horizontal") < 0)
+        {
+            playerSpriteRenderer.flipX = true;
+        }
+        else if(animator.GetFloat("Horizontal") > 0)
+        {
+            playerSpriteRenderer.flipX = false;
+        }
     }
-
     private void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * speed * Time.deltaTime);

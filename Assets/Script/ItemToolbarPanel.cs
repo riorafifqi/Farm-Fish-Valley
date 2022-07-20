@@ -7,6 +7,11 @@ public class ItemToolbarPanel : ItemPanel
     [SerializeField] ToolbarController toolbarController;
     int currentSelectedTool;
 
+    private void Awake()
+    {
+        toolbarController = GameObject.Find("GameManager").GetComponent<ToolbarController>();
+    }
+
     private void Start()
     {
         Init();

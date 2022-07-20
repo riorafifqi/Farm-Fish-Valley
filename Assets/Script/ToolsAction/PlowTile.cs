@@ -10,14 +10,19 @@ public class PlowTile : ToolAction
 
     public override bool OnApplyToTileMap(Vector3Int gridPosition, MapManager mapManager, Item item)
     {
+        Debug.Log("OnApplyToTileMap PlowTile Called");
+
         TileBase tileToPlow = mapManager.GetTileBase(gridPosition);
 
-        if (!canPlow.Contains(tileToPlow))
+        TilesData tileToPlowData = mapManager.GetTileData(tileToPlow);
+
+        if (!tileToPlowData.isPlowable)
         {
             return false;
         }
 
         mapManager.cropsManager.Plow(gridPosition);
+        isApplied = true;
 
         return true;
     }

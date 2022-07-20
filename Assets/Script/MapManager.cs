@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class MapManager : MonoBehaviour
 {
-    [SerializeField] private Tilemap map;
+    public Tilemap baseMap;
     public CropsManager cropsManager;
 
     [SerializeField] public List<TilesData> tileDatas;
@@ -27,7 +27,7 @@ public class MapManager : MonoBehaviour
 
     public TileBase GetTileBase(Vector3Int gridPos)
     {
-        TileBase tile = map.GetTile(gridPos);
+        TileBase tile = baseMap.GetTile(gridPos);
 
         return tile;
     }
@@ -45,7 +45,7 @@ public class MapManager : MonoBehaviour
             worldPosition = position;
         }
 
-        Vector3Int gridPosition = map.WorldToCell(worldPosition);
+        Vector3Int gridPosition = baseMap.WorldToCell(worldPosition);
 
         return gridPosition;
     }

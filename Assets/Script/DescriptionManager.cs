@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class DescriptionManager : MonoBehaviour
 {
     private MapManager mapManager;
+    private ToolsController toolsController;
     [SerializeField] private Tilemap environmentMap;
+    [SerializeField] private Tilemap cropsMap;
+
     [SerializeField] private Text objectName;
     [SerializeField] private Text objectDescription;
     [SerializeField] private GameObject DescriptionBox;
@@ -16,6 +20,7 @@ public class DescriptionManager : MonoBehaviour
     void Awake()
     {
         mapManager = gameObject.GetComponent<MapManager>();
+        toolsController = gameObject.GetComponent<ToolsController>();
     }
     
     void Start()
@@ -25,12 +30,23 @@ public class DescriptionManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+
+            if (toolsController.usedItem.isStackable)
+                return;
+
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int gridPos = environmentMap.WorldToCell(mousePos);
 
-            TileBase clickedTile = environmentMap.GetTile(gridPos);
+            TileBase clickedTile;
+            if ((clickedTile = cropsMap.GetTile(gridPos)) == null)
+                clickedTile = environmentMap.GetTile(gridPos);
+            
+            if (clickedTile == null)
+                return;
 
             if (mapManager.GetTileData(clickedTile).isDescriptive)
             {
@@ -41,5 +57,10 @@ public class DescriptionManager : MonoBehaviour
                 DescriptionBox.SetActive(true);
             }
         }
+
+        /*if(Input.anyKeyDown)
+        {
+            DescriptionBox.SetActive(false);
+        }*/
     }
 }

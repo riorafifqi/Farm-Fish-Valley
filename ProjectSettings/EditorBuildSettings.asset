@@ -6,6 +6,33 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/MainMenu.unity
+    guid: a75a4700b80fc714db9e500cb3e3674c
+  - enabled: 1
+    path: Assets/Scenes/Level_Udang.unity
+    guid: e6d196053c9d6b347bc34aa41b3778d4
+  - enabled: 1
+    path: Assets/Scenes/Level_Udang 1.unity
+    guid: 1c19a728592841948a6f6f418d6c091e
+  - enabled: 1
+    path: Assets/Scenes/Level_Udang 2.unity
+    guid: 07358af577465ba4ba1c2b3c183a6bb7
+  - enabled: 1
+    path: Assets/Scenes/Level_Nila.unity
+    guid: d8a93dd752f61d649bd3d9462938ba79
+  - enabled: 1
+    path: Assets/Scenes/Level_Nila 1.unity
+    guid: a1423b4ee605bca46ad017457a722163
+  - enabled: 1
+    path: Assets/Scenes/Level_Nila 2.unity
+    guid: 53f3dfad2c9194c478dbec052f0ed176
+  - enabled: 1
+    path: Assets/Scenes/Level_Bandeng.unity
+    guid: b078f0d9e3d83b145922c3684c3f2a9c
+  - enabled: 1
+    path: Assets/Scenes/Level_Bandeng 1.unity
+    guid: 00301e90fe137a9499839ca956591a67
+  - enabled: 1
+    path: Assets/Scenes/Level_Bandeng 2.unity
+    guid: 59483fa93584c7d44920bdd3081f33d4
   m_configObjects: {}

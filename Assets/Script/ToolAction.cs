@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ToolAction : ScriptableObject
 {
+    public bool isApplied = false;
+    public MapManager environmentMapManager; 
+
     public virtual bool OnApply(Vector2 worldPoint)
     {
         Debug.LogWarning("OnApply is not inmplemented");

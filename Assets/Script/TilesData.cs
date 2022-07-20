@@ -10,6 +10,14 @@ public class TilesData : ScriptableObject
 
     public bool isPlowable;
     public bool isDescriptive;
+
+    public bool isKincirable;
+    public bool isPumpable;
+    public bool isFilterable;
+    public bool isPakanable;
+
+    public bool isTool;
+
     public string TileName, description;
     public int score;
 }
