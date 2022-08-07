@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToGrow: 20
   yield: {fileID: 11400000, guid: bf4a7ef08257acc4eaae99e43163a64b, type: 2}
+  failYield: {fileID: 11400000, guid: 85896d2c68a74b9468d36809b8c0fbc5, type: 2}
   count: 1
+  isPupuked: 1
+  unhealthyCrop: {fileID: 11400000, guid: 04b804e7249d5ec4e8b00188851b02a6, type: 2}
   sprites:
   - {fileID: 11400000, guid: a80747519e8b81348be1f40d42257441, type: 2}
   - {fileID: 11400000, guid: 3e29b3eeaa3c01b41917324979dd4b5a, type: 2}

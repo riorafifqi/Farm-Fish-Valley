@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Benih Ikan Bandeng
   isStackable: 1
-  icon: {fileID: 7769680586756898747, guid: b355f429d7dca6d458617f2a7dcb0a08, type: 3}
+  icon: {fileID: -904062756635143055, guid: b355f429d7dca6d458617f2a7dcb0a08, type: 3}
   onAction: {fileID: 0}
   onTileMapAction: {fileID: 11400000, guid: 52baefaa976db9948bada7c31e0eb729, type: 2}
   onItemUsed: {fileID: 11400000, guid: 52baefaa976db9948bada7c31e0eb729, type: 2}

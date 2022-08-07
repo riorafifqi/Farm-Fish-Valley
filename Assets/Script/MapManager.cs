@@ -5,13 +5,13 @@ using UnityEngine.Tilemaps;
 
 public class MapManager : MonoBehaviour
 {
-    public Tilemap baseMap;
+    public Tilemap baseMap;         // Environment Tilemap
     public CropsManager cropsManager;
 
     [SerializeField] public List<TilesData> tileDatas;
     private Dictionary<TileBase, TilesData> dataFromTiles;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         cropsManager = gameObject.GetComponent<CropsManager>();
 

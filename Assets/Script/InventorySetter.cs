@@ -11,14 +11,12 @@ public class InventorySetter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 1;
-
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < inventory.itemSlots.Count; i++)
         {
             inventory.itemSlots[i].Clear();
         }
 
-        for (int i = 0; i < itemsToAdd.Count; i++)
+        for (int i = 0; i < inventory.itemSlots.Count; i++)
         {
             inventory.Add(itemsToAdd[i], itemsToAddCount[i]);
         }

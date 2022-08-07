@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: PakanTileAction
   m_EditorClassIdentifier: 
   isApplied: 0
+  environmentMapManager: {fileID: 0}
+  unpakanableTiles:
+  - {fileID: 11400000, guid: dce8250cd762a384b93a144708f51e28, type: 2}

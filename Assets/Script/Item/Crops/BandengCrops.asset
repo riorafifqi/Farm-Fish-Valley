@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: BandengCrops
   m_EditorClassIdentifier: 
   timeToGrow: 20
-  yield: {fileID: 11400000, guid: 4ba471ad12976264fb2ee8d8bf5ca756, type: 2}
+  yield: {fileID: 11400000, guid: 5458e5b7dca63c24daefcd7d381fa6ca, type: 2}
+  failYield: {fileID: 11400000, guid: 86b0252a85f6c934da676adcba826bec, type: 2}
   count: 1
+  isPupuked: 1
+  unhealthyCrop: {fileID: 11400000, guid: 04b804e7249d5ec4e8b00188851b02a6, type: 2}
   sprites:
   - {fileID: 11400000, guid: a80747519e8b81348be1f40d42257441, type: 2}
   - {fileID: 11400000, guid: 3e29b3eeaa3c01b41917324979dd4b5a, type: 2}

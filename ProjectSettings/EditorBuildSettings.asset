@@ -13,26 +13,26 @@ EditorBuildSettings:
     guid: e6d196053c9d6b347bc34aa41b3778d4
   - enabled: 1
     path: Assets/Scenes/Level_Udang 1.unity
-    guid: 1c19a728592841948a6f6f418d6c091e
+    guid: 425b7c15c6485dd449ae8e6b1fc21650
   - enabled: 1
     path: Assets/Scenes/Level_Udang 2.unity
-    guid: 07358af577465ba4ba1c2b3c183a6bb7
+    guid: 89ef8b5106faf5748aa5c17e3dc391e4
   - enabled: 1
     path: Assets/Scenes/Level_Nila.unity
-    guid: d8a93dd752f61d649bd3d9462938ba79
+    guid: b19380b5f248ac34f877421dd72a9ecc
   - enabled: 1
     path: Assets/Scenes/Level_Nila 1.unity
-    guid: a1423b4ee605bca46ad017457a722163
+    guid: 64f19163a7c9a6e4883fe799d59bc1e0
   - enabled: 1
     path: Assets/Scenes/Level_Nila 2.unity
-    guid: 53f3dfad2c9194c478dbec052f0ed176
+    guid: 5594d5bae4e1924439c239d9c93fd4b2
   - enabled: 1
     path: Assets/Scenes/Level_Bandeng.unity
-    guid: b078f0d9e3d83b145922c3684c3f2a9c
+    guid: e43935c00c2b5af4c8d329b5d9dfa6e7
   - enabled: 1
     path: Assets/Scenes/Level_Bandeng 1.unity
-    guid: 00301e90fe137a9499839ca956591a67
+    guid: b3b1c56a111cf8b40b4bc3d283745090
   - enabled: 1
     path: Assets/Scenes/Level_Bandeng 2.unity
-    guid: 59483fa93584c7d44920bdd3081f33d4
+    guid: accd26cf1c169d34abaa3e6c8f1acd5e
   m_configObjects: {}

@@ -7,7 +7,6 @@ public class PakanQuest : QuestCompleteCondition
 {
     public override bool Condition()
     {
-        Debug.Log(cropTile.crop.name);
         if(toolAction.isApplied)
         {
             if (!cropTile.crop.name.Contains("Semai"))

@@ -11,7 +11,9 @@ public class TilePickUp : ToolAction
     {
         bool isSuccess = false;
         TileBase tileToPlow = mapManager.GetTileBase(gridPosition);
-        TilesData tileToPlowData = mapManager.GetTileData(tileToPlow);
+        TilesData tileToPlowData = null;
+        if(mapManager.GetTileData(tileToPlow))
+            tileToPlowData = mapManager.GetTileData(tileToPlow);
 
         if (mapManager.cropsManager.crops.ContainsKey((Vector2Int)gridPosition))
             isSuccess = mapManager.cropsManager.PickUp(gridPosition);
@@ -20,7 +22,7 @@ public class TilePickUp : ToolAction
             isSuccess = mapManager.cropsManager.CheckTool(gridPosition);
             currentlyChecked = mapManager.GetTileBase(gridPosition);
         }
-            
+
         if (isSuccess)
             isApplied = true;
 

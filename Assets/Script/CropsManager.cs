@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,9 @@ public class CropTile
 
     public bool growFully = false;
     public bool isFed = false;
+    public bool isHealthy = true;
+    public bool isAbnormal = false;
+    public bool isPupuked = true;
 }
 
 public class CropsManager : TimeAgent
@@ -25,11 +29,12 @@ public class CropsManager : TimeAgent
     [SerializeField] TileBase filtered;
     [SerializeField] TileBase pakaned;
     [SerializeField] TileBase pakanedSemai;
+    [SerializeField] TileBase pupuked;
 
     [SerializeField] TileBase tileSemai;
 
     [SerializeField] Tilemap environmentTilemap;
-    [SerializeField] Tilemap cropsTilemap;
+    public Tilemap cropsTilemap;
     [SerializeField] Tilemap scoreTilemap;
 
     [SerializeField] ScoreManager scoreManager;
@@ -47,6 +52,13 @@ public class CropsManager : TimeAgent
     public QuestCompleteCondition panenQuest, pakanSemaiQuest, pakanQuest;
 
     public Dictionary<Vector2Int, CropTile> crops;
+
+    private void Awake()
+    {
+        environmentTilemap = GameObject.Find("Grid").transform.GetChild(2).GetComponent<Tilemap>();
+        cropsTilemap = GameObject.Find("Grid").transform.GetChild(3).GetComponent<Tilemap>();
+        scoreTilemap = GameObject.Find("Grid").transform.GetChild(4).GetComponent<Tilemap>();
+    }
 
     private void Start()
     {
@@ -77,17 +89,30 @@ public class CropsManager : TimeAgent
         {
             if (cropTile.crop == null) { continue; }
 
-            if(cropTile.isFed)
+            if(cropTile.isFed && cropTile.isHealthy && !cropTile.isAbnormal)
                 cropTile.growTimer += 1;
 
-            if(cropTile.growTimer >= cropTile.crop.growthStageTime[cropTile.growStage])
+            if (cropTile.growTimer >= cropTile.crop.growthStageTime[cropTile.growStage])
             {
                 if (cropTile.growTimer < cropTile.crop.timeToGrow)
                     cropTile.growStage += 1;
-                cropsTilemap.SetTile(cropTile.cropPosition, cropTile.crop.sprites[cropTile.growStage]);
+                
+                if (!cropTile.isHealthy)
+                {
+                    cropsTilemap.SetTile(cropTile.cropPosition, cropTile.crop.unhealthyCrop);
+                }
+                else
+                {
+                    cropsTilemap.SetTile(cropTile.cropPosition, cropTile.crop.sprites[cropTile.growStage]);
+                }
             }
 
-            if(cropTile.growTimer >= cropTile.crop.timeToGrow)
+            if (!cropTile.isHealthy)
+            {
+                cropsTilemap.SetTile(cropTile.cropPosition, cropTile.crop.unhealthyCrop);
+            }
+
+            if (cropTile.growTimer >= cropTile.crop.timeToGrow)
             {
                 //Debug.Log("Done growing");
                 cropTile.growFully = true;
@@ -100,8 +125,11 @@ public class CropsManager : TimeAgent
         if (crops.ContainsKey((Vector2Int)position))
             return;
 
+        if(!ToolsTilesTracker.plows.Contains(position))
+            ToolsTilesTracker.plows.Add(position);
+
         CreatePlowedTile(position, plowed);
-        Debug.Log("Plow called");
+        Debug.Log(ToolsTilesTracker.plows.Count);
     }
 
     public void Kincir(Vector3Int position)
@@ -109,26 +137,34 @@ public class CropsManager : TimeAgent
         if (crops.ContainsKey((Vector2Int)position))
             return;
 
+        if(!ToolsTilesTracker.kincirs.Contains(position))
+            ToolsTilesTracker.kincirs.Add(position);
+
         CreatePlowedTile(position, kincired);
-        Debug.Log("Kincir called");
+        Debug.Log(ToolsTilesTracker.kincirs.Count);
     }
 
     public void Pompa(Vector3Int position)
     {
         if (crops.ContainsKey((Vector2Int)position))
             return;
+        
+        if(!ToolsTilesTracker.pompas.Contains(position))
+            ToolsTilesTracker.pompas.Add(position);
 
         CreatePlowedTile(position, pumped);
-        Debug.Log("Pompa called");
+        Debug.Log(ToolsTilesTracker.pompas.Count);
     }
 
     public void Filter(Vector3Int position)
     {
         if (crops.ContainsKey((Vector2Int)position))
             return;
+        if (!ToolsTilesTracker.filters.Contains(position))
+            ToolsTilesTracker.filters.Add(position);
 
         CreatePlowedTile(position, filtered);
-        Debug.Log("Filter called");
+        Debug.Log(ToolsTilesTracker.filters.Count);
     }
 
     public void Pakan(Vector3Int position)
@@ -138,18 +174,39 @@ public class CropsManager : TimeAgent
 
         if (crops[(Vector2Int)position].crop.name.Contains("Semai"))
         {
-            pakanSemaiQuest.cropTile = crops[(Vector2Int)position];
             CreatePlowedTile(position, pakanedSemai);
+            pakanSemaiQuest.cropTile = crops[(Vector2Int)position];
         }
         else
         {
-            pakanQuest.cropTile = crops[(Vector2Int)position];
             CreatePlowedTile(position, pakaned);
+            pakanQuest.cropTile = crops[(Vector2Int)position];
+
+            if (!ToolsTilesTracker.pakans.Contains(position))
+                ToolsTilesTracker.pakans.Add(position);
         }
 
         crops[(Vector2Int)position].isFed = true;
 
         Debug.Log("Pakan called");
+    }
+
+    public void Supplemen(Vector3Int position)
+    {
+        if (!crops.ContainsKey((Vector2Int)position))
+            return;
+
+        //CreatePlowedTile(position, pakaned);    // supplement give same tile effect as pakan
+        crops[(Vector2Int)position].isHealthy = true;
+    }
+
+    public void Pupuk(Vector3Int position)
+    {
+        if (!crops.ContainsKey((Vector2Int)position))
+            return;
+
+        CreatePlowedTile(position, pupuked);    // pupuk give same tile effect as pakan
+        crops[(Vector2Int)position].isPupuked = true;
     }
 
     void CreatePlowedTile(Vector3Int position, TileBase tileBase)
@@ -169,6 +226,9 @@ public class CropsManager : TimeAgent
         }
 
         cropsTilemap.SetTile(position, seeded);
+        if (ToolsTilesTracker.plows.Contains(position))
+            ToolsTilesTracker.plows.Remove(position);   // remove plows coordinate in ToolsTilesTracker if seed is planted
+
         if (environmentTilemap.GetTile(position) == plowed)
         {
             TileBase scoreTile = scoreManager.GetTileBase(position);
@@ -179,6 +239,7 @@ public class CropsManager : TimeAgent
         CropTile crop = new CropTile();
         crops.Add((Vector2Int)position, crop);
         crops[(Vector2Int)position].crop = toSeed;
+        crops[(Vector2Int)position].isPupuked = crops[(Vector2Int)position].crop.isPupuked;
 
         crop.cropPosition = position;
 
@@ -208,11 +269,32 @@ public class CropsManager : TimeAgent
         CropTile cropTile = crops[position];
         panenQuest.cropTile = cropTile;
 
-        if (cropTile.growFully)
+        Debug.Log(cropTile.isAbnormal);
+
+        if (cropTile.growFully && cropTile.isHealthy && cropTile.isPupuked && !cropTile.isAbnormal)
         {
             inventory.Add(cropTile.crop.yield, 1);
             cropsTilemap.SetTile(gridPosition, null);
-            environmentTilemap.SetTile(gridPosition, null);
+
+            environmentTilemap.SetTile(gridPosition, null); // remove plowed tile
+
+            ToolsTilesTracker.pakans.Remove(gridPosition);
+            ToolsTilesTracker.plows.Remove(gridPosition);
+
+            crops.Remove(position);
+
+            return true;
+        }
+        else if(cropTile.isAbnormal)
+        {
+            Debug.Log("Crop is abnormal");
+            inventory.Add(cropTile.crop.failYield, 1);
+            cropsTilemap.SetTile(gridPosition, null);
+
+            environmentTilemap.SetTile(gridPosition, null); // remove plowed tile
+
+            ToolsTilesTracker.pakans.Remove(gridPosition);
+            ToolsTilesTracker.plows.Remove(gridPosition);
 
             crops.Remove(position);
 

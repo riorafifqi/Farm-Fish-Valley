@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: NilaCrops
   m_EditorClassIdentifier: 
   timeToGrow: 20
-  yield: {fileID: 11400000, guid: a8bae27585a5c35439a40393ba946891, type: 2}
+  yield: {fileID: 11400000, guid: 0905c2fcdf1c9b84a8ab2ac3d7da23c4, type: 2}
+  failYield: {fileID: 11400000, guid: 5df5c9a0b02aa634abe6ede8d6cc0d38, type: 2}
   count: 1
+  isPupuked: 1
+  unhealthyCrop: {fileID: 11400000, guid: 04b804e7249d5ec4e8b00188851b02a6, type: 2}
   sprites:
   - {fileID: 11400000, guid: a80747519e8b81348be1f40d42257441, type: 2}
   - {fileID: 11400000, guid: 3e29b3eeaa3c01b41917324979dd4b5a, type: 2}

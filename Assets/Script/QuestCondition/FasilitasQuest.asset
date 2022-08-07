@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703be571e511eff4da1d549a35bebc29, type: 3}
+  m_Name: FasilitasQuest
+  m_EditorClassIdentifier: 
+  toolAction: {fileID: 0}
+  harvest: {fileID: 0}
+  toolActions:
+  - {fileID: 11400000, guid: 6c10e7a7233d9d042bc111e444b8863d, type: 2}
+  - {fileID: 11400000, guid: 2c563fd1bb379da4dbaf30f21ba0edd0, type: 2}
+  - {fileID: 11400000, guid: dda80b5a8cf1c4a4aa155a8282153290, type: 2}

@@ -19,6 +19,9 @@ public class DescriptionManager : MonoBehaviour
 
     void Awake()
     {
+        environmentMap = GameObject.Find("Grid").transform.GetChild(2).GetComponent<Tilemap>();
+        cropsMap = GameObject.Find("Grid").transform.GetChild(3).GetComponent<Tilemap>();
+
         mapManager = gameObject.GetComponent<MapManager>();
         toolsController = gameObject.GetComponent<ToolsController>();
     }
@@ -53,7 +56,7 @@ public class DescriptionManager : MonoBehaviour
                 objectName.text = mapManager.GetTileData(clickedTile).TileName;
                 objectDescription.text = mapManager.GetTileData(clickedTile).description;
 
-                DescriptionBox.transform.position = gridPos;
+                DescriptionBox.transform.position = gridPos + new Vector3(0.5f, 2, 0);
                 DescriptionBox.SetActive(true);
             }
         }

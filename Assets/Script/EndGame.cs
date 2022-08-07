@@ -75,13 +75,13 @@ public class EndGame : MonoBehaviour
     public void RetryLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        PauseMenu.isPaused = false;
+        InGameMenu.isPaused = false;
     }
 
     public void MainMenu()
     {
         SceneManager.LoadScene(0);
-        PauseMenu.isPaused = false;
+        InGameMenu.isPaused = false;
     }
 
     private void Win()

@@ -13,7 +13,6 @@ public class PlowTile : ToolAction
         Debug.Log("OnApplyToTileMap PlowTile Called");
 
         TileBase tileToPlow = mapManager.GetTileBase(gridPosition);
-
         TilesData tileToPlowData = mapManager.GetTileData(tileToPlow);
 
         if (!tileToPlowData.isPlowable)

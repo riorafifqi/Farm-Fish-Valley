@@ -7,15 +7,16 @@ public class TimerQuest : MonoBehaviour
 {
     EndGame endGame;
     public int questId;
-    public GameObject questParent;
-    public Quest timerQuest;
+    //public GameObject questParent;
+    public List<Quest> timerQuests;
+    public List<Quest> activatedTimerQuests;
+    public int questCount = 1;
 
     public float timeTillActive = 1f;
     public float currentTime = 0f;
 
     public float timeRemaining = 60f;
     public float timer = 0f;
-    public Text timerUI;
     public bool isInProgress = false;
 
     private void Awake()
@@ -26,52 +27,93 @@ public class TimerQuest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //timeTillActive = Random.Range(minTime, maxTime);
-        questId = Random.Range(0, questParent.transform.childCount - 1);
-        timerQuest = questParent.transform.GetChild(questId).GetComponent<Quest>();
+        for (int i = 0; i < questCount; i++)
+        {
+            while (activatedTimerQuests.Contains(timerQuests[questId]))
+            {
+                questId = Random.Range(0, timerQuests.Count - 1);
+            }
+            activatedTimerQuests.Add(timerQuests[questId]);
+
+        }
+        questId = Random.Range(0, timerQuests.Count - 1);
+        //timerQuest = questParent.transform.GetChild(questId).GetComponent<Quest>();
     }
 
     void Update()
     {
         if (currentTime > timeTillActive && !isInProgress)
         {
-
             InstantiateQuest();
             currentTime = 0f;
         }
-        else if (!isInProgress)
-            currentTime += Time.deltaTime;
+        currentTime += Time.deltaTime;
 
         if (timer > 0)
         {
             timer -= Time.deltaTime;
             int timerToInt = (int)timer;
-            timerUI.text = timerToInt.ToString() + "s";
 
-            if (timer <= 0f)
+            foreach (Quest activeQuest in activatedTimerQuests)
             {
-                timer = 0f; // timer off
-                if (!timerQuest.isComplete)
+                activeQuest.gameObject.GetComponentInChildren<Text>().text = timerToInt.ToString() + "s";   
+            }
+        }
+
+        if (timer <= 0f && isInProgress)
+        {
+            timer = 0f; // timer off
+            foreach (Quest activeQuest in activatedTimerQuests)
+            {
+                if (!activeQuest.isComplete)
                     endGame.Lose();     // Game End with losing 
             }
         }
 
-        if (timerQuest.isComplete)
+        foreach (Quest activeQuest in activatedTimerQuests)
+        {
+            if (activeQuest.isComplete)
+            {
+                activeQuest.gameObject.SetActive(false);    // deactivate active quest gameobject
+                activatedTimerQuests.Remove(activeQuest);   // remove active quest from list
+            }
+        }
+
+        if(activatedTimerQuests.Count == 0) // if all complete
+        {
+            for (int i = 0; i < questCount; i++)
+            {
+                while (activatedTimerQuests.Contains(timerQuests[questId]))
+                {
+                    questId = Random.Range(0, timerQuests.Count - 1);
+                }
+                timerQuests[questId].isComplete = false;
+                activatedTimerQuests.Add(timerQuests[questId]);
+            }
+
+            timer = 0f; // reset timer
+            isInProgress = false;
+        }
+
+        /*if (timerQuest.isComplete)
         {
             timerQuest.transform.parent.gameObject.SetActive(false); // deactivate parent
             questParent.transform.GetChild(questId).gameObject.SetActive(false);
 
-            questId = Random.Range(0, questParent.transform.childCount - 1);
+            questId = Random.Range(0, questParent.transform.childCount - 1);    // randomize new quest
             timerQuest = questParent.transform.GetChild(questId).GetComponent<Quest>();
-            timer = 0f;
+
+            timer = 0f; // reset timer
+
             isInProgress = false;
-        }
+            timerQuest.isComplete = false;
+        }*/
     }
 
     void InstantiateQuest()
     {
-        questParent.SetActive(true); // activate parent
-        questParent.transform.GetChild(questId).gameObject.SetActive(true);
+        foreach (Quest activeQuest in activatedTimerQuests)
+            activeQuest.gameObject.SetActive(true);
 
         // timer start
         timer = timeRemaining;

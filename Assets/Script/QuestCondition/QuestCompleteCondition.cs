@@ -8,7 +8,6 @@ public class QuestCompleteCondition : ScriptableObject
 
     public TilePickUp harvest;
     public CropTile cropTile;
-    public CropsManager cropsManager;
 
     public virtual bool Condition()
     {

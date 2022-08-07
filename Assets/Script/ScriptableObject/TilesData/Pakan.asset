@@ -17,12 +17,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 914939cca328e56458fea15e967699be, type: 2}
   - {fileID: 11400000, guid: 8c3853ce13d428a42914bf2d4559ed24, type: 2}
   - {fileID: 11400000, guid: ad49333577aa88a4091829fce0f4fd61, type: 2}
+  - {fileID: 11400000, guid: d0e6a12d1e481944d86ea74f54e0ee69, type: 2}
+  - {fileID: 11400000, guid: dce8250cd762a384b93a144708f51e28, type: 2}
   isPlowable: 0
   isDescriptive: 0
   isKincirable: 0
   isPumpable: 0
   isFilterable: 0
   isPakanable: 1
+  isTool: 0
   TileName: Pakan
   description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

@@ -33,7 +33,7 @@ public class QuizManager : MonoBehaviour
             Time.timeScale = 1;
 
             result = true;
-            transform.gameObject.SetActive(false);
+            //transform.gameObject.SetActive(false);
         }
         else
         {
