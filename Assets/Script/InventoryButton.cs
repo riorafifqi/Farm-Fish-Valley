@@ -6,26 +6,27 @@ using UnityEngine.UI;
 
 public class InventoryButton : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] Image icon;
-    [SerializeField] Text text;
-    [SerializeField] Image highlight;
+    [SerializeField] Image icon;        // item icon
+    [SerializeField] Text text;         // item count text
+    [SerializeField] Image highlight;   // selected item highlight
 
-    int myIndex;
+    int myIndex;        // inventory slot index (left = 0)
 
-    public void SetIndex(int index)
+    public void SetIndex(int index)     // set inventory slot index
     {
         myIndex = index;
     }
 
     public void Set(ItemSlot slot)
     {
+        // set button placed item
         icon.sprite = slot.item.icon;
         icon.gameObject.SetActive(true);
         text.gameObject.SetActive(true);
 
         if (slot.item.isStackable)
         {
-            text.text = slot.count.ToString();
+            text.text = slot.count.ToString();  // show count text UI if stackable
         }
         else
             text.gameObject.SetActive(false);
@@ -33,6 +34,7 @@ public class InventoryButton : MonoBehaviour, IPointerClickHandler
 
     public void Clean()
     {
+        // clean button to empty
         icon.sprite = null;
         icon.gameObject.SetActive(false);
 
@@ -41,16 +43,14 @@ public class InventoryButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        /*ItemContainer inventory = GameManager.instance.itemContainer;
-        GameManager.instance.dragNDropController.OnClick(inventory.itemSlots[myIndex]);
-        transform.parent.GetComponent<InventoryPanel>().Show();*/
 
         ItemPanel itemPanel = transform.parent.GetComponent<ItemPanel>();
-        itemPanel.OnClick(myIndex);
+        itemPanel.OnClick(myIndex);     // highlight and set item as used item
     }
 
     public void Highlight(bool b)
     {
+        // highlight target item
         highlight.gameObject.SetActive(b);
     }
 }

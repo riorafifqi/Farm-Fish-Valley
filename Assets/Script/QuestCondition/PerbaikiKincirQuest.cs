@@ -25,27 +25,28 @@ public class PerbaikiKincirQuest : Quest
 
     private void Update()
     {
-        taskConditionUI.text = "(" + taskCurrentProgress.ToString() + "/" + taskToCompleteProgress.ToString() + ")";
+        taskConditionUI.text = "(" + taskCurrentProgress.ToString() + "/" + taskToCompleteProgress.ToString() + ")";    // update progress UI
 
-        foreach (Vector3Int brokenMapCoord in brokenMapList)
+        foreach (Vector3Int brokenMapCoord in brokenMapList)        // check all broken kincir in field
         {
-            if(mapManager.GetTileBase(brokenMapCoord) == fixedMap)
+            if(mapManager.GetTileBase(brokenMapCoord) == fixedMap)      // if kincir tileMap back to normal
             {
                 if (!isComplete)
-                    taskCurrentProgress++;
-                brokenMapList.Remove(brokenMapCoord);
+                    taskCurrentProgress++;      // increment progress
+                brokenMapList.Remove(brokenMapCoord);       // remove fixed tileMap coord from list
             }
         }
 
-        if (taskCurrentProgress == taskToCompleteProgress)
+        if (taskCurrentProgress == taskToCompleteProgress)      // if task current progress equal to target
         {
-            isComplete = true;
+            isComplete = true;      // complete task
         }
         else
             isComplete = false;
 
         if (isComplete)
         {
+            // set task UI color to complete color
             taskNameUI.color = completeColor;
             taskConditionUI.color = completeColor;
         }
@@ -53,17 +54,18 @@ public class PerbaikiKincirQuest : Quest
 
     private void OnEnable()
     {
+        // set default color and progress on enable
         taskNameUI.color = Color.white;
         taskConditionUI.color = Color.white;
         taskCurrentProgress = 0;
 
-        taskToCompleteProgress = ToolsTilesTracker.kincirs.Count;
-        foreach (Vector3Int kincir in ToolsTilesTracker.kincirs)
+        taskToCompleteProgress = ToolsTilesTracker.kincirs.Count;       // target based on kincir in field
+        foreach (Vector3Int kincir in ToolsTilesTracker.kincirs)        // add all kincir to potential broken list
         {
             brokenMapList.Add(kincir);
         }
 
-        for (int i = 0; i < brokenMapList.Count; i++)
+        for (int i = 0; i < brokenMapList.Count; i++)       // set all kincir in field to broken kincir
         {
             mapManager.baseMap.SetTile(brokenMapList[i], brokenMap);
         }

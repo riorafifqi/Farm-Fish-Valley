@@ -24,34 +24,35 @@ public class ItemDragNDropController : MonoBehaviour
     {
         if(dragItemIcon.activeInHierarchy == true)
         {
-            iconTransform.position = Input.mousePosition;
+            iconTransform.position = Input.mousePosition;       // item icon position follow the cursor position when being drag
         }
     }
 
     internal void OnClick(ItemSlot itemSlot)
     {
-        if(this.itemSlot.item == null)
+        if(this.itemSlot.item == null)  // if click on item on inventory
         {
-            this.itemSlot.Copy(itemSlot);
-            itemSlot.Clear();
+            this.itemSlot.Copy(itemSlot);   // copy item to temp storage when being drag
+            itemSlot.Clear();   // clear slot on item
         } else
         {
-            Item item = itemSlot.item;
+            Item item = itemSlot.item;      // set empty to current drag item
             int count = itemSlot.count;
 
-            itemSlot.Copy(this.itemSlot);
-            this.itemSlot.Set(item, count);
+            itemSlot.Copy(this.itemSlot);   
+            this.itemSlot.Set(item, count); // set slot to dragged ite
         }
-        UpdateIcon();
+        UpdateIcon();       // update item cursor UI
     }
 
     private void UpdateIcon()
     {
+        // if no item, cursor back to normal
         if(itemSlot.item == null)
         {
             dragItemIcon.SetActive(false);
         }
-        else
+        else  // else, setactive icon to true and change sprite to currently dragged item
         {
             dragItemIcon.SetActive(true);
             itemIconImage.sprite = itemSlot.item.icon;

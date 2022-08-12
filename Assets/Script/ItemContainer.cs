@@ -9,19 +9,19 @@ public class ItemSlot
     public Item item;
     public int count;
 
-    public void Copy(ItemSlot slot)
+    public void Copy(ItemSlot slot)     // copy item to slot destination
     {
         item = slot.item;
         count = slot.count;
     }
 
-    public void Set(Item item, int count)
+    public void Set(Item item, int count)       // set item and count
     {
         this.item = item;
         this.count = count;
     }
 
-    public void Clear()
+    public void Clear()     // clear item in slot
     {
         item = null;
         count = 0;
@@ -31,33 +31,33 @@ public class ItemSlot
 [CreateAssetMenu]
 public class ItemContainer : ScriptableObject
 {
-    public List<ItemSlot> itemSlots;
+    public List<ItemSlot> itemSlots;        // amount of  inventory
 
     public void Add(Item item, int count = 1)
     {
         if (item.isStackable == true)
         {
-            ItemSlot itemSlot = itemSlots.Find(x => x.item == item);
+            ItemSlot itemSlot = itemSlots.Find(x => x.item == item);        // find item slot with same type
             if (itemSlot != null)
             {
-                itemSlot.count += count;
+                itemSlot.count += count;    // increase count if item is available
             }
             else
             {
-                itemSlot = itemSlots.Find(x => x.item == null);
+                itemSlot = itemSlots.Find(x => x.item == null);     // find empty slot
                 if (itemSlot != null)
                 {
-                    itemSlot.item = item;
+                    itemSlot.item = item;       // set empty slot to target item
                     itemSlot.count = count;
                 }
             }
         }
-        else
+        else  // item isn't stackable
         {
-            ItemSlot itemSlot = itemSlots.Find(x => x.item == null);
+            ItemSlot itemSlot = itemSlots.Find(x => x.item == null);    // find empty slot
             if (itemSlot != null)
             {
-                itemSlot.item = item;
+                itemSlot.item = item;   // set empty slot to target item
             }
         }
             
@@ -67,13 +67,13 @@ public class ItemContainer : ScriptableObject
     {
         if (itemToRemove.isStackable)
         {
-            ItemSlot itemSlot = itemSlots.Find(x => x.item == itemToRemove);
+            ItemSlot itemSlot = itemSlots.Find(x => x.item == itemToRemove);        // find target item in slot
             if (itemSlot == null) { return; }
 
-            itemSlot.count -= count;
+            itemSlot.count -= count;    // reduce count
             if (itemSlot.count <= 0)
             {
-                itemSlot.Clear();
+                itemSlot.Clear();   // remove item from slot if item amount is 0
             }
         }
         else
@@ -82,10 +82,10 @@ public class ItemContainer : ScriptableObject
             {
                 count -= 1;
 
-                ItemSlot itemSlot = itemSlots.Find(x => x.item == itemToRemove);
+                ItemSlot itemSlot = itemSlots.Find(x => x.item == itemToRemove);    // find target item in slot
                 if (itemSlot == null) { return; }
 
-                itemSlot.Clear();
+                itemSlot.Clear();       // clear item slot
             }
         }
     }

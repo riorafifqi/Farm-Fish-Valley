@@ -25,39 +25,35 @@ public class DescriptionManager : MonoBehaviour
         mapManager = gameObject.GetComponent<MapManager>();
         toolsController = gameObject.GetComponent<ToolsController>();
     }
-    
-    void Start()
-    {
-        //DescriptionBox.SetActive(false);
-    }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))        // if left mouse button pressed
         {
-            if (EventSystem.current.IsPointerOverGameObject())
+            if (EventSystem.current.IsPointerOverGameObject())      // if cursor above UI
                 return;
 
             if (toolsController.usedItem.isStackable)
                 return;
 
+            // convert cursor position to cell
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int gridPos = environmentMap.WorldToCell(mousePos);
 
             TileBase clickedTile;
             if ((clickedTile = cropsMap.GetTile(gridPos)) == null)
-                clickedTile = environmentMap.GetTile(gridPos);
+                clickedTile = environmentMap.GetTile(gridPos);      // if no crops clicked
             
             if (clickedTile == null)
                 return;
 
-            if (mapManager.GetTileData(clickedTile).isDescriptive)
+            if (mapManager.GetTileData(clickedTile).isDescriptive)      // if tile data has description
             {
-                objectName.text = mapManager.GetTileData(clickedTile).TileName;
-                objectDescription.text = mapManager.GetTileData(clickedTile).description;
+                objectName.text = mapManager.GetTileData(clickedTile).TileName;     // assign tileName to UI
+                objectDescription.text = mapManager.GetTileData(clickedTile).description;   // assign tile desc to UI
 
-                DescriptionBox.transform.position = gridPos + new Vector3(0.5f, 2, 0);
-                DescriptionBox.SetActive(true);
+                DescriptionBox.transform.position = gridPos + new Vector3(0.5f, 2, 0);  // set panel box above object
+                DescriptionBox.SetActive(true); // activate gameobject
             }
         }
 

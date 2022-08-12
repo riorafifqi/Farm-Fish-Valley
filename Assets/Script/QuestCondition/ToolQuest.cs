@@ -7,9 +7,9 @@ public class ToolQuest : QuestCompleteCondition
 {
     public override bool Condition()
     {
-        if (toolAction.isApplied)
+        if (toolAction.isApplied)       // if tools is successfully applied
         {
-            toolAction.isApplied = false;
+            toolAction.isApplied = false;   // toggle back isApplied to false to prevent loop
             return true;
         }
 

@@ -10,10 +10,10 @@ public class PakanSemaiQuest : QuestCompleteCondition
         //Debug.Log(cropTile.crop.name + " from PakanSemai" );
         if(toolAction.isApplied)
         {
-            if (cropTile.crop.name.Contains("Semai"))
+            if (cropTile.crop.name.Contains("Semai"))       // if the pakan-ed crops is semai crops
             {
                 cropTile = null;
-                toolAction.isApplied = false;
+                toolAction.isApplied = false;   // toggle back to false to prevent loop
                 return true;
             }
         }

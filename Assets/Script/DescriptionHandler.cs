@@ -16,7 +16,7 @@ public class DescriptionHandler : MonoBehaviour
         descAnimator = gameObject.GetComponent<Animator>();
     }
 
-    public void CloseDescriptionPanel()
+    public void CloseDescriptionPanel()     // this function accessed by close button in description
     {
         isFinish = true;
     }

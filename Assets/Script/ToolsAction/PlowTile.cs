@@ -10,10 +10,9 @@ public class PlowTile : ToolAction
 
     public override bool OnApplyToTileMap(Vector3Int gridPosition, MapManager mapManager, Item item)
     {
-        Debug.Log("OnApplyToTileMap PlowTile Called");
 
-        TileBase tileToPlow = mapManager.GetTileBase(gridPosition);
-        TilesData tileToPlowData = mapManager.GetTileData(tileToPlow);
+        TileBase tileToPlow = mapManager.GetTileBase(gridPosition);     // plow tile tilebase
+        TilesData tileToPlowData = mapManager.GetTileData(tileToPlow);  // plow tile tile data
 
         if (!tileToPlowData.isPlowable)
         {
@@ -21,7 +20,7 @@ public class PlowTile : ToolAction
         }
 
         mapManager.cropsManager.Plow(gridPosition);
-        isApplied = true;
+        isApplied = true;       // trigger plow task progress
 
         return true;
     }

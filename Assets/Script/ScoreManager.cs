@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class ScoreManager : MapManager
 {
     private int score = 0;
-    [SerializeField] public Text scoreText;
+    public Text scoreText;
 
     private void Update()
     {
-        scoreText.text = score.ToString();
+        scoreText.text = score.ToString();  // update score UI for testing
     }
 
     public void AddScore(int scoreToAdd)

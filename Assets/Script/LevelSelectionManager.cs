@@ -21,7 +21,7 @@ public class LevelSelectionManager : MonoBehaviour
 
         // Level Udang
         int udangLevelAt = PlayerPrefs.GetInt("udangLevelAt", 1);
-        for (int i = 0; i < udangLvlButtons.Length; i++)
+        for (int i = 0; i < udangLvlButtons.Length; i++)        // make all locked level uninteractable
         {
             if (i + 1 > udangLevelAt)
                 udangLvlButtons[i].interactable = false;
@@ -29,7 +29,7 @@ public class LevelSelectionManager : MonoBehaviour
 
         // Level Nila
         int nilaLevelAt = PlayerPrefs.GetInt("nilaLevelAt", 4);
-        for (int i = 0; i < nilaLvlButtons.Length; i++)
+        for (int i = 0; i < nilaLvlButtons.Length; i++)     // make all locked level uninteractable
         {
             if (i + 4 > nilaLevelAt)
                 nilaLvlButtons[i].interactable = false;
@@ -37,7 +37,7 @@ public class LevelSelectionManager : MonoBehaviour
 
         // Level Bandeng
         int bandengLevelAt = PlayerPrefs.GetInt("bandengLevelAt", 7);
-        for (int i = 0; i < bandengLvlButtons.Length; i++)
+        for (int i = 0; i < bandengLvlButtons.Length; i++)      // make all locked level uninteractable
         {
             if (i + 7 > bandengLevelAt)
                 bandengLvlButtons[i].interactable = false;
@@ -48,11 +48,11 @@ public class LevelSelectionManager : MonoBehaviour
     void Update()
     {
         // control previous and next button
-        if (selectedPanel == 0)
+        if (selectedPanel == 0)     // if panel is in first slide
             prevButton.SetActive(false);
-        else if (selectedPanel == levelSelectPanels.Length - 1)
+        else if (selectedPanel == levelSelectPanels.Length - 1)     // panel is in last slide
             nextButton.SetActive(false);
-        else
+        else  // panel in the middle
         {
             nextButton.SetActive(true);
             prevButton.SetActive(true);

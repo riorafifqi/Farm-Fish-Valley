@@ -9,12 +9,12 @@ public class CheckQuest : QuestCompleteCondition
     public TileBase toolToCheck;
     public override bool Condition()
     {
-        if(harvest.isApplied)
+        if(harvest.isApplied)       // if pickUp action is success
         {
-            if (toolToCheck == harvest.currentlyChecked)
+            if (toolToCheck == harvest.currentlyChecked)       // if player is checking the right tool
             {
-                harvest.isApplied = false;
-                harvest.currentlyChecked = null;
+                harvest.isApplied = false;      // toggle quest isApplied to avoid loop
+                harvest.currentlyChecked = null;    // remove checked tool when finish
                 return true;
             }
         }

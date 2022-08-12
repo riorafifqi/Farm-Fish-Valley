@@ -16,30 +16,26 @@ public class PakanTileAction : ToolAction
 
         TileBase tileToCheck = GameManager.instance.environmentTilemap.GetTile(gridPosition);    // to check if tiles is pakanable
 
-        if (!tileToPlowData.isPakanable)
+        if (!tileToPlowData.isPakanable)    // if tile data isn't pakanable
         {
             Debug.Log("No pakanabel");
-            return false;
+            return false;       // action failed
         }
 
-        if (mapManager.cropsManager.isToolPlaced(gridPosition))
+        if (mapManager.cropsManager.isToolPlaced(gridPosition))     // if there is a tool placed in the grid
         {
             Debug.Log("Tools can't be placed");
-            return false;
+            return false;       // action failed
         }
 
-        /*if (!mapManager.cropsManager.crops.ContainsKey((Vector2Int)gridPosition))
-            return false;*/
-
-        if (unpakanableTiles.Contains(tileToCheck))
+        if (unpakanableTiles.Contains(tileToCheck))     // if tiles is not pakanable
         {
-            Debug.Log("PakanableTiles does'nt contain tihs");
-            return false;
+            return false;       // action failed
         }
 
         mapManager.cropsManager.Pakan(gridPosition);
-        isApplied = true;
+        isApplied = true;       // to trigger task/quest
 
-        return true;
+        return true;        // action success
     }
 }

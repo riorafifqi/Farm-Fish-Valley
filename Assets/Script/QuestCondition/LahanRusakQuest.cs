@@ -28,27 +28,28 @@ public class LahanRusakQuest : Quest
         if (taskToCompleteProgress > ToolsTilesTracker.plows.Count)
             taskToCompleteProgress = ToolsTilesTracker.plows.Count;
 
-        taskConditionUI.text = "(" + taskCurrentProgress.ToString() + "/" + taskToCompleteProgress.ToString() + ")";
+        taskConditionUI.text = "(" + taskCurrentProgress.ToString() + "/" + taskToCompleteProgress.ToString() + ")";      // update text UI
 
-        foreach (Vector3Int brokenMapCoord in brokenMapList)
+        foreach (Vector3Int brokenMapCoord in brokenMapList)        // check all brokenMap in field
         {
-            if(mapManager.GetTileBase(brokenMapCoord) == fixedMap)
+            if(mapManager.GetTileBase(brokenMapCoord) == fixedMap)  // if brokenMap change to fixedMap
             {
                 if (!isComplete)
                     taskCurrentProgress++;
-                brokenMapList.Remove(brokenMapCoord);
+                brokenMapList.Remove(brokenMapCoord);       // remove fixedMap from brokenMap list
             }
         }
 
-        if (taskCurrentProgress == taskToCompleteProgress)
+        if (taskCurrentProgress == taskToCompleteProgress)      // if target fulfilled
         {
-            isComplete = true;
+            isComplete = true;      // complete task
         }
         else
             isComplete = false;
 
         if (isComplete)
         {
+            // change task ui color to completeColor
             taskNameUI.color = completeColor;
             taskConditionUI.color = completeColor;
         }
@@ -56,28 +57,26 @@ public class LahanRusakQuest : Quest
 
     private void OnEnable()
     {
+        // set UI and progress to default
         taskNameUI.color = Color.white;
         taskConditionUI.color = Color.white;
         taskCurrentProgress = 0;
 
-        taskToCompleteProgress = ToolsTilesTracker.plows.Count;
-        foreach (Vector3Int plow in ToolsTilesTracker.plows)
+        taskToCompleteProgress = ToolsTilesTracker.plows.Count;     // target based on all plowed map
+        foreach (Vector3Int plow in ToolsTilesTracker.plows)        // add all plowed map to broken list
         {
             brokenMapList.Add(plow);
         }
 
-        Debug.Log("TTTCount: " + ToolsTilesTracker.pakans.Count);
-        Debug.Log("brokenMapListCount: " + brokenMapList.Count);
-
         for (int i = 0; i < brokenMapList.Count; i++)
         {
-            mapManager.baseMap.SetTile(brokenMapList[i], brokenMap);
+            mapManager.baseMap.SetTile(brokenMapList[i], brokenMap);        // change plowed map to broken map
         }
     }
 
     private void OnDisable()
     {
-        brokenMapList.Clear();
+        brokenMapList.Clear();      // clear brokenMap after task finish
     }
 
 

@@ -25,42 +25,35 @@ public class EndGame : MonoBehaviour
     private void Start()
     {
         quests = GameObject.Find("QuestList").GetComponentsInChildren<Quest>();
-        nextSceneLoad = SceneManager.GetActiveScene().buildIndex + 1;
+        nextSceneLoad = SceneManager.GetActiveScene().buildIndex + 1;       
     }
 
     public void Update()
     {
         isEnd = false;
         //if (cropsManager.crops.Count == tilesCount)
-        isEnd = CheckCondition();
+        isEnd = CheckCondition();   
 
         if (isEnd)
         {
             //End();
             Win();
+            // Lose() only on timer quest script
         }
     }
 
     private void End()
     {
-        finishPanel.SetActive(true);
-        scoreText.text = "Your Score : " + scoreManager.GetScore().ToString();
-        Time.timeScale = 0;
+        finishPanel.SetActive(true);    // activate finish panel
+        scoreText.text = "Your Score : " + scoreManager.GetScore().ToString();  // show final score on panel
+        Time.timeScale = 0; // pause game
     }
 
-    private bool CheckCondition()
+    private bool CheckCondition()   
     {
-        /*foreach (CropTile cropTile in cropsManager.crops.Values)
+        foreach (Quest quest in quests)     // check each quest
         {
-            if(!cropTile.growFully)
-            {
-                return false;
-            }
-        }*/
-
-        foreach (Quest quest in quests)
-        {
-            if (!quest.isComplete)
+            if (!quest.isComplete)      // return false if there is incomplete quest
                 return false;
         }
 
@@ -88,39 +81,39 @@ public class EndGame : MonoBehaviour
     {
         End();
 
-        finishText.text = "Stage Clear";
-        winButton.SetActive(true);
-        loseButton.SetActive(false);
+        finishText.text = "Stage Clear";    // set finish text
+        winButton.SetActive(true);      // next button
+        loseButton.SetActive(false);    // retry button
 
-        UnlockLevel();
+        UnlockLevel();      // unlock next level
     }
 
     public void Lose()
     {
         End();
 
-        finishText.text = "You Failed";
-        winButton.SetActive(false);
-        loseButton.SetActive(true);
+        finishText.text = "You Failed";     // set finish text
+        winButton.SetActive(false);     // next button
+        loseButton.SetActive(true);     // retry button
     }
 
     private void UnlockLevel()
     {
-        if (SceneManager.GetActiveScene().name.Contains("Udang"))
+        if (SceneManager.GetActiveScene().name.Contains("Udang"))       // unlock level at udang level
         {
             if (nextSceneLoad > PlayerPrefs.GetInt("udangLevelAt"))
             {
                 PlayerPrefs.SetInt("udangLevelAt", nextSceneLoad);
             }
         }
-        else if (SceneManager.GetActiveScene().name.Contains("Nila"))
+        else if (SceneManager.GetActiveScene().name.Contains("Nila"))   // unlock level at nila level
         {
             if (nextSceneLoad > PlayerPrefs.GetInt("nilaLevelAt"))
             {
                 PlayerPrefs.SetInt("nilaLevelAt", nextSceneLoad);
             }
         }
-        else if (SceneManager.GetActiveScene().name.Contains("Bandeng"))
+        else if (SceneManager.GetActiveScene().name.Contains("Bandeng"))    // unlock level at bandeng level
         {
             if (nextSceneLoad > PlayerPrefs.GetInt("bandengLevelAt"))
             {

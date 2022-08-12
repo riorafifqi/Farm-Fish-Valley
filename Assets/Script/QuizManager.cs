@@ -18,21 +18,21 @@ public class QuizManager : MonoBehaviour
 
     private void Start()
     {
-        Time.timeScale = 0;
-        soal.text = soalQuiz.soal;
+        Time.timeScale = 0;     // pause game when quiz in progress
+        soal.text = soalQuiz.soal;          // set soal and answer to UI
         tombol1.text = soalQuiz.tombol1;
         tombol2.text = soalQuiz.tombol2;
     }
 
     public void PressAnswer()
     {
-        if(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name == soalQuiz.jawabanBenar)
+        if(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name == soalQuiz.jawabanBenar)       // if the pressed button name is the same as the correct answer
         {
             // Jawaban benar
             Debug.Log("Benar");
-            Time.timeScale = 1;
+            Time.timeScale = 1;     // unpause game
 
-            result = true;
+            result = true;      // trigger quiz to close
             //transform.gameObject.SetActive(false);
         }
         else
@@ -40,7 +40,7 @@ public class QuizManager : MonoBehaviour
             Debug.Log("Salah");
             //jawaban salah
 
-            endGame.Lose();
+            endGame.Lose();     // lose game
             result = false;
         }
     }

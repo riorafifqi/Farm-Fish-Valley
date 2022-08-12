@@ -8,13 +8,13 @@ public class TilesData : ScriptableObject
 {
     public TileBase[] tiles;
 
-    public bool isPlowable;
-    public bool isDescriptive;
+    public bool isPlowable;     // tile can be plowed
+    public bool isDescriptive;  // tile can has description
 
-    public bool isKincirable;
-    public bool isPumpable;
-    public bool isFilterable;
-    public bool isPakanable;
+    public bool isKincirable;   // kincir can be placed
+    public bool isPumpable;     // pompa can be placed
+    public bool isFilterable;   // filter can be placed
+    public bool isPakanable;    // pakan can be plance
 
     public bool isTool;
 

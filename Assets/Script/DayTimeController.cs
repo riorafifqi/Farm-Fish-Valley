@@ -43,26 +43,26 @@ public class DayTimeController : MonoBehaviour
 
     float Hours
     {
-        get { return time / 3600f; }
+        get { return time / 3600f; }    // convert second to hours
     }
 
     float Minutes
     {
-        get { return time % 3600f / 60f; }
+        get { return time % 3600f / 60f; }  // convert second to minutes
     }
 
     void Start()
     {
-        time = startTime;
+        time = startTime;      // set current time to start time
 
-        int hh = (int)Hours;
+        int hh = (int)Hours; 
         int mm = (int)Minutes;
-        timeText.text = hh.ToString("00") + ":" + mm.ToString("00");
+        timeText.text = hh.ToString("00") + ":" + mm.ToString("00");    // show current time to UI
     }
 
     private void Update()
     {
-        time += Time.deltaTime * timeScale;
+        time += Time.deltaTime * timeScale;     // update each time
 
         TimeCalculation();
 
@@ -88,8 +88,6 @@ public class DayTimeController : MonoBehaviour
                 agents[i].Invoke();
             }
         }
-
-        
     }
 
     private void NextDay()

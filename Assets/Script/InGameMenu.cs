@@ -23,7 +23,7 @@ public class InGameMenu : MonoBehaviour
         if(isPaused)
         {
             pauseMenuUI.SetActive(false);
-            Time.timeScale = 1f;
+            Time.timeScale = 1f;    // unpause
             isPaused = false;
         }
     }
@@ -33,7 +33,7 @@ public class InGameMenu : MonoBehaviour
         if(!isPaused)
         {
             pauseMenuUI.SetActive(true);
-            Time.timeScale = 0f;
+            Time.timeScale = 0f;    // pause
             isPaused = true;
         }
     }

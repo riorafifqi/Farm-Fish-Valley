@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // make player only move 4 directional
         if (Input.GetKey(KeyCode.W)) key = KeyCode.W;
         else if (Input.GetKey(KeyCode.A)) key = KeyCode.A;
         else if (Input.GetKey(KeyCode.S)) key = KeyCode.S;

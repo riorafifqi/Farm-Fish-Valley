@@ -12,35 +12,27 @@ public class RollingText : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(Waiter());
-        Time.timeScale = 0;
-        textRect.sizeDelta = new Vector2(0, 1);
+        StartCoroutine(Waiter());       // wait before start scrolling
+        Time.timeScale = 0;     // pause game
+        textRect.sizeDelta = new Vector2(0, 1);     // set size delta to default
     }
 
     void Update()
     {
-        if (textRect.anchoredPosition.y >= textRect.sizeDelta.y)
+        if (textRect.anchoredPosition.y >= textRect.sizeDelta.y)        // if text rolled to the bottom
         {
-            scrollAnimator.SetBool("isPlaying", false);
-            scrollAnimator.speed = 0;
-            xButton.SetActive(true);
-        }
-    }
-
-    public IEnumerator WaitForRealSeconds(float time)
-    {
-        float start = Time.realtimeSinceStartup;
-        while (Time.realtimeSinceStartup < start + time)
-        {
-            yield return null;
+            scrollAnimator.SetBool("isPlaying", false);     // stop scrolling
+            scrollAnimator.speed = 0;           // stop scrolling
+            xButton.SetActive(true);        // activate close button
         }
     }
 
     IEnumerator Waiter()
     {
-        yield return new WaitForSecondsRealtime(5f);
+        yield return new WaitForSecondsRealtime(5f);    
 
         scrollAnimator.SetBool("isPlaying", true);
+        // change speed in Animator in Text GameObject under ScrollRect to set scrolling text
     }
 
     public void StartGame()

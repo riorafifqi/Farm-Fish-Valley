@@ -45,54 +45,55 @@ public class Quest : MonoBehaviour
     void Update()
     {
         taskNameUI.text = taskName;
-        taskConditionUI.text = "(" + taskCurrentProgress.ToString() + "/" + taskToCompleteProgress.ToString() + ")";
+        taskConditionUI.text = "(" + taskCurrentProgress.ToString() + "/" + taskToCompleteProgress.ToString() + ")";        // update progress to UI
 
-        if(questCondition)
+        if(questCondition)      // if QuestCompleteCondition script exist
         {
-            if (!timerQuest.isInProgress)
-                if (questCondition.Condition())
+            if (!timerQuest.isInProgress)       // if timer quest is not in progress
+                if (questCondition.Condition())     // if quest condition scriptable object return true
                 {
                     if (!isComplete)
-                        taskCurrentProgress++;
+                        taskCurrentProgress++;      // update progress
                 }
 
         }
 
-        if (taskCurrentProgress == taskToCompleteProgress)
+        if (taskCurrentProgress == taskToCompleteProgress)      // if complete
         {
             if (soalQuiz && !isComplete)  // if there's a quiz
             {
-                quiz.soalQuiz = soalQuiz;
+                quiz.soalQuiz = soalQuiz;       // assign quiz's question
 
                 //quiz.transform.gameObject.SetActive(true);
                 quiz.gameObject.GetComponent<Animator>().SetBool("IsOpen", true);   // open quiz
 
-                if (quiz.result)
+                if (quiz.result)    // if the answer is right
                 {
-                    isComplete = true;
+                    isComplete = true;      // complete the task
                     quiz.gameObject.GetComponent<Animator>().SetBool("IsOpen", false);  // close quiz
-                    //quiz.transform.gameObject.SetActive(false);
-                    quiz.result = false;
+                    
+                    quiz.result = false;    // toggle result back to false to prevent loop
                 }
             }
-            else if (description.Length != 0)
+            else if (description.Length != 0)       // if there is description after task
             {
-                descriptionText.text = description;
-                descriptionAnim.SetBool("IsOpen", true);
-                if(descriptionHandler.isFinish)
+                descriptionText.text = description;     // assign description to UI
+                descriptionAnim.SetBool("IsOpen", true);    // open desc panel
+                if(descriptionHandler.isFinish)     // if player is finish reading by pressing close button
                 {
-                    descriptionAnim.SetBool("IsOpen", false);
-                    isComplete = true;
+                    descriptionAnim.SetBool("IsOpen", false);   // close desc panel
+                    isComplete = true;      // complete task
                 }
             }
-            else
+            else  // no desc or quiz
             {
-                isComplete = true;
+                isComplete = true;  // complete task    
             }
         }
 
-        if (isComplete)
+        if (isComplete)     // if complete
         {
+            // change task color to complete color
             taskNameUI.color = completeColor;
             taskConditionUI.color = completeColor;
         }
@@ -101,6 +102,7 @@ public class Quest : MonoBehaviour
 
     private void OnEnable()
     {
+        // set color and progress to default when enabled
         taskNameUI.color = Color.white;
         taskConditionUI.color = Color.white;
         taskCurrentProgress = 0;

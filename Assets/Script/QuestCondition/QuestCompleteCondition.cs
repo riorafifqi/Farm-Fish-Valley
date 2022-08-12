@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class QuestCompleteCondition : ScriptableObject
 {
-    public ToolAction toolAction;
+    // Parent of normal task complete condition (only normal quest)
+    public ToolAction toolAction;   // related tool action (ex: task beri pakan = PakanTileAction)
 
-    public TilePickUp harvest;
-    public CropTile cropTile;
+    public TilePickUp harvest;      // for harvest related task
+    public CropTile cropTile;      
 
     public virtual bool Condition()
     {

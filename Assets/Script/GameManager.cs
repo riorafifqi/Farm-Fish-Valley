@@ -10,10 +10,10 @@ public class GameManager : MonoBehaviour
     public ItemContainer itemContainer;
     public DayTimeController timeController;
     public ItemDragNDropController dragNDropController;
-    public GameObject autoScroll;
+    private GameObject autoScroll;
 
     public Tilemap environmentTilemap;
-    public QuizManager quiz;
+    private QuizManager quiz;
 
     private void Awake()
     {
@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        autoScroll.GetComponent<Animator>().SetBool("IsOpen", true);
-        //quiz.gameObject.SetActive(false);
+        autoScroll.GetComponent<Animator>().SetBool("IsOpen", true);    // Open auto scroll panel when game start
     }
 }
