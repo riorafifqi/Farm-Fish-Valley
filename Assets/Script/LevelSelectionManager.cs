@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class LevelSelectionManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] levelSelectPanels;
+    [SerializeField] SwipeMenuAnimation[] levelSelectPanels;
     int selectedPanel;
     [SerializeField] GameObject nextButton, prevButton;
 
@@ -64,8 +64,8 @@ public class LevelSelectionManager : MonoBehaviour
         if (selectedPanel < levelSelectPanels.Length - 1)
         {
             selectedPanel++;
-            levelSelectPanels[selectedPanel].SetActive(true);
-            levelSelectPanels[selectedPanel - 1].SetActive(false);
+            levelSelectPanels[selectedPanel].SwipeLeftIn();        // Object in from left to mid
+            levelSelectPanels[selectedPanel - 1].SwipeLeftOut();  // Object out from mid to right
         }
     }
 
@@ -74,8 +74,8 @@ public class LevelSelectionManager : MonoBehaviour
         if (selectedPanel > 0)
         {
             selectedPanel--;
-            levelSelectPanels[selectedPanel].SetActive(true);
-            levelSelectPanels[selectedPanel + 1].SetActive(false);
+            levelSelectPanels[selectedPanel].SwipeRightIn();       // Object in from the left
+            levelSelectPanels[selectedPanel + 1].SwipeRightOut();  // Object out to the left
         }
     }
 

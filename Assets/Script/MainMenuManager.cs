@@ -8,6 +8,11 @@ public class MainMenuManager : MonoBehaviour
     public GameObject settingPanel;
     public GameObject mainPanel;
 
+    public void Start()
+    {
+        Time.timeScale = 1f;
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

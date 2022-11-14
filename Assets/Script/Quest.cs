@@ -65,12 +65,12 @@ public class Quest : MonoBehaviour
                 quiz.soalQuiz = soalQuiz;       // assign quiz's question
 
                 //quiz.transform.gameObject.SetActive(true);
-                quiz.gameObject.GetComponent<Animator>().SetBool("IsOpen", true);   // open quiz
+                quiz.gameObject.GetComponent<SettingPanelAnimation>().Open();   // open quiz
 
                 if (quiz.result)    // if the answer is right
                 {
                     isComplete = true;      // complete the task
-                    quiz.gameObject.GetComponent<Animator>().SetBool("IsOpen", false);  // close quiz
+                    quiz.gameObject.GetComponent<SettingPanelAnimation>().Close();  // close quiz
                     
                     quiz.result = false;    // toggle result back to false to prevent loop
                 }

@@ -19,7 +19,7 @@ public class EndGame : MonoBehaviour
     int targetScore = 200;
     public Quest[] quests;
 
-    bool isEnd = false;
+    public bool isEnd = false;
     public int nextSceneLoad;
 
     private void Start()
@@ -45,7 +45,7 @@ public class EndGame : MonoBehaviour
     private void End()
     {
         finishPanel.SetActive(true);    // activate finish panel
-        scoreText.text = "Your Score : " + scoreManager.GetScore().ToString();  // show final score on panel
+        scoreText.text = scoreManager.GetScore().ToString();  // show final score on panel
         Time.timeScale = 0; // pause game
     }
 
@@ -69,21 +69,24 @@ public class EndGame : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         InGameMenu.isPaused = false;
+        Time.timeScale = 1f;
     }
 
     public void MainMenu()
     {
         SceneManager.LoadScene(0);
         InGameMenu.isPaused = false;
+        Time.timeScale = 1f;
     }
 
     private void Win()
     {
         End();
 
-        finishText.text = "Stage Clear";    // set finish text
+        finishText.text = "Clear";    // set finish text
         winButton.SetActive(true);      // next button
         loseButton.SetActive(false);    // retry button
+        finishPanel.GetComponent<WinAnimation>().WinDecorationOpen();
 
         UnlockLevel();      // unlock next level
     }
@@ -92,7 +95,7 @@ public class EndGame : MonoBehaviour
     {
         End();
 
-        finishText.text = "You Failed";     // set finish text
+        finishText.text = "Failed";     // set finish text
         winButton.SetActive(false);     // next button
         loseButton.SetActive(true);     // retry button
     }

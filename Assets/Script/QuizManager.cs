@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class QuizManager : MonoBehaviour
 {
     public SoalQuiz soalQuiz;
-    public Text tombol1, tombol2;
-    public Text soal;
+    public TMP_Text tombolLU, tombolLD, tombolRU, tombolRD;
+    public TMP_Text soal;
     public EndGame endGame;
     public bool result;
 
@@ -20,13 +21,17 @@ public class QuizManager : MonoBehaviour
     {
         Time.timeScale = 0;     // pause game when quiz in progress
         soal.text = soalQuiz.soal;          // set soal and answer to UI
-        tombol1.text = soalQuiz.tombol1;
-        tombol2.text = soalQuiz.tombol2;
+        tombolLU.text = soalQuiz.tombolLU;
+        tombolLD.text = soalQuiz.tombolLD;
+        tombolRU.text = soalQuiz.tombolRU;
+        tombolRD.text = soalQuiz.tombolRD;
     }
 
     public void PressAnswer()
     {
-        if(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name == soalQuiz.jawabanBenar)       // if the pressed button name is the same as the correct answer
+        Debug.Log("Selected answer: " + UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name);
+        Debug.Log("Right: " + soalQuiz.jawabanBenar);
+        if (UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name == soalQuiz.jawabanBenar)       // if the pressed button name is the same as the correct answer
         {
             // Jawaban benar
             Debug.Log("Benar");
@@ -38,6 +43,7 @@ public class QuizManager : MonoBehaviour
         else
         {
             Debug.Log("Salah");
+            GetComponent<SettingPanelAnimation>().Close();
             //jawaban salah
 
             endGame.Lose();     // lose game

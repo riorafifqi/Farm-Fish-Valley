@@ -6,7 +6,9 @@ using UnityEngine;
 public class SoalQuiz : ScriptableObject
 {
     public string soal;
-    public string tombol1;
-    public string tombol2;
+    public string tombolLU;
+    public string tombolLD;
+    public string tombolRU;
+    public string tombolRD;
     public string jawabanBenar;
 }

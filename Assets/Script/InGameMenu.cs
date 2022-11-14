@@ -22,7 +22,6 @@ public class InGameMenu : MonoBehaviour
     {
         if(isPaused)
         {
-            pauseMenuUI.SetActive(false);
             Time.timeScale = 1f;    // unpause
             isPaused = false;
         }
@@ -50,6 +49,25 @@ public class InGameMenu : MonoBehaviour
             inventoryUI.SetActive(true);
             toolbarUI.SetActive(false);
         }
+    }
+
+    public void InventoryOpen()
+    {
+        inventoryUI.transform.localPosition = new Vector2(0f, -Screen.height);
+        inventoryUI.GetComponentInChildren<CanvasGroup>().alpha = 0f;
+
+        inventoryUI.GetComponentInChildren<CanvasGroup>().LeanAlpha(1f, 0.5f);
+        inventoryUI.transform.LeanMoveLocalY(0f, 0.5f);
+        toolbarUI.transform.LeanMoveLocalY(-Screen.height, 0.5f);
+    }
+
+    public void InventoryClose()
+    {
+        inventoryUI.transform.localPosition = new Vector2(0f, 0f);
+
+        inventoryUI.GetComponentInChildren<CanvasGroup>().LeanAlpha(0f, 0.5f);
+        inventoryUI.transform.LeanMoveLocalY(-Screen.height, 0.5f);
+        toolbarUI.transform.LeanMoveLocalY(59.97f, 0.5f);
     }
 
 

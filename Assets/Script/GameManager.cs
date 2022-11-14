@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public ItemContainer itemContainer;
     public DayTimeController timeController;
     public ItemDragNDropController dragNDropController;
-    private GameObject autoScroll;
+    private StartPanelAnimation autoScroll;
 
     public Tilemap environmentTilemap;
     private QuizManager quiz;
@@ -21,11 +21,11 @@ public class GameManager : MonoBehaviour
         instance = this;
         environmentTilemap = GameObject.Find("Grid").transform.GetChild(2).GetComponent<Tilemap>();
         dragNDropController = gameObject.GetComponent<ItemDragNDropController>();
-        autoScroll = GameObject.Find("AutoRollTextPanel");
+        autoScroll = GameObject.FindObjectOfType<StartPanelAnimation>();
     }
 
     private void Start()
     {
-        autoScroll.GetComponent<Animator>().SetBool("IsOpen", true);    // Open auto scroll panel when game start
+        autoScroll.Open();  // Open start panel
     }
 }
